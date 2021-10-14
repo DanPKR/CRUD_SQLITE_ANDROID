@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val nombre: String,
+    val descripcion: String,
     val status: String,
     val createdAt: String,
     val updatedAt: String
