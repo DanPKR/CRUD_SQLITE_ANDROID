@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity(){
         DbProvider.init(applicationContext)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
+                .add(R.id.container, MainFragment.newInstance())
+                .commit()
         }
     }
 

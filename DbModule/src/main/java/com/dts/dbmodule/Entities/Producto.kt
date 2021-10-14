@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 @Entity
  data class Producto(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val nombre: String,
-    val descripcion: String,
-    val status: String,
+    val id: Int?,
+    var nombre: String,
+    var descripcion: String,
+    var status: String,
     val createdAt: String,
-    val updatedAt: String
+    var updatedAt: String
 )

@@ -22,8 +22,6 @@ class MainFragment : Fragment(), View.OnClickListener {
     private  var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +43,7 @@ class MainFragment : Fragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when(p0!!.id){
             R.id.addFB->{
-                parentFragmentManager
+                requireActivity().supportFragmentManager
                     .beginTransaction()
                     .replace(R.id.container,CreateUpdateFragment.newInstance())
                     .commit()

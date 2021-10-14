@@ -1,5 +1,5 @@
 package com.dts.dbmodule.Enums
 
-internal enum class Status {
+ enum class ProductStatus {
     ACTIVE,INACTIVE,PENDING,SUSPENDED
 }

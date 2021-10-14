@@ -9,7 +9,7 @@ interface ProductoDao {
     suspend fun getAllProductos(): List<Producto>
 
     @Query("SELECT * FROM Producto WHERE status = :status")
-    suspend fun getProductosByStatus(status: Int): List<Producto>
+    suspend fun getProductosByStatus(status: String): List<Producto>
 
     @Query("SELECT * FROM Producto WHERE id = :id")
     suspend fun getProductoById(id: Int): Producto
