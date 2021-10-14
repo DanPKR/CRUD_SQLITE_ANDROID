@@ -99,7 +99,7 @@ class CreateUpdateFragment : Fragment(), View.OnClickListener {
         parentFragmentManager
             .beginTransaction()
             .replace(R.id.container,MainFragment.newInstance())
-            .commitNow()
+            .commit()
     }
 
 

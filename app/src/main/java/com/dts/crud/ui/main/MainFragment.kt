@@ -7,12 +7,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dts.crud.R
 import com.dts.crud.databinding.MainFragmentBinding
 import com.dts.crud.ui.CreateUpdate.CreateUpdateFragment
+import com.dts.crud.ui.main.adapters.DbAdapter
+import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment(), View.OnClickListener {
     private val TAG = "MainFragment"
+    private val adapter = DbAdapter(emptyList())
 
     companion object {
         fun newInstance() = MainFragment()
@@ -26,18 +30,19 @@ class MainFragment : Fragment(), View.OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         _binding = MainFragmentBinding.inflate(layoutInflater,container,false)
         initViews()
         return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-    }
-
     private fun initViews(){
         binding.addFB.setOnClickListener(this)
+        binding.DbElementsRV.layoutManager = LinearLayoutManager(activity)
+        binding.DbElementsRV.adapter = adapter
+        viewModel.data.observe(viewLifecycleOwner,{
+            adapter.values = it
+        })
+        viewModel.FetchData()
     }
 
     override fun onClick(p0: View?) {
