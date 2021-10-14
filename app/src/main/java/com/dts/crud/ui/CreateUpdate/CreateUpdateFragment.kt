@@ -77,7 +77,7 @@ class CreateUpdateFragment : Fragment(), View.OnClickListener {
     private fun FillFields(producto: Producto){
         binding.title.setText("Actualizar Registro")
         binding.NombreTIL.editText?.setText(producto.nombre)
-        binding.NombreTIL.editText?.setText(producto.descripcion)
+        binding.DescripccionTIL.editText?.setText(producto.descripcion)
     }
 
     private fun onSaveClicked(){

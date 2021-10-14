@@ -14,9 +14,9 @@ import com.dts.crud.ui.CreateUpdate.CreateUpdateFragment
 import com.dts.crud.ui.main.adapters.DbAdapter
 import kotlinx.android.synthetic.main.main_fragment.*
 
-class MainFragment : Fragment(), View.OnClickListener {
+class MainFragment : Fragment(), View.OnClickListener,DbAdapter.onItemListener {
     private val TAG = "MainFragment"
-    private val adapter = DbAdapter(emptyList())
+    private val adapter = DbAdapter(emptyList(),this)
 
     companion object {
         fun newInstance() = MainFragment()
@@ -35,14 +35,20 @@ class MainFragment : Fragment(), View.OnClickListener {
         initViews()
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.FetchData()
+    }
     private fun initViews(){
         binding.addFB.setOnClickListener(this)
         binding.DbElementsRV.layoutManager = LinearLayoutManager(activity)
         binding.DbElementsRV.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner,{
             adapter.values = it
+            adapter.notifyDataSetChanged()
         })
-        viewModel.FetchData()
+
     }
 
     override fun onClick(p0: View?) {
@@ -54,6 +60,14 @@ class MainFragment : Fragment(), View.OnClickListener {
                     .commit()
             }
         }
+    }
+
+    override fun onClickedItem(position: Int) {
+        val prod = adapter.values.get(position)
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container,CreateUpdateFragment.newInstance(prod.id!!))
+            .commit()
     }
 
 }

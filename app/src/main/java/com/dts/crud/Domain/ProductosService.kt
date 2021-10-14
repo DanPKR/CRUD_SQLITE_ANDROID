@@ -45,7 +45,7 @@ object ProductosService {
     suspend fun getActiveProductos(): List<Producto>{
         return withContext(Dispatchers.IO){
             val list = DbProvider.db!!.productoDao().getProductosByStatus(ProductStatus.ACTIVE.name)
-            list?: emptyList()
+            list
         }
     }
 
