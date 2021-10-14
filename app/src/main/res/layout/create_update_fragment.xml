@@ -47,6 +47,13 @@
         <View
         android:layout_width="match_parent"
         android:layout_height="15dp"/>
+        <Button
+            android:id="@+id/deletebtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="Borrar Registro"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -58,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="5dp"
+                android:layout_gravity="center_horizontal"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:text="Cancelar"/>
             <Button
@@ -65,6 +73,7 @@
                 android:enabled="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginHorizontal="5dp"
                 app:icon = "@drawable/ic_baseline_save_24"
                 style="@style/Widget.MaterialComponents.Button.Icon"

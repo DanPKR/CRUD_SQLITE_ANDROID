@@ -42,4 +42,10 @@ class CreateUpdateViewModel : ViewModel() {
         }
     }
 
+    fun DeleteData(){
+        viewModelScope.launch {
+            ProductosService.safeDeleteProduct(currentProducto.value?.id!!)
+        }
+    }
+
 }

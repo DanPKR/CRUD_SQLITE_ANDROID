@@ -55,7 +55,7 @@ class CreateUpdateFragment : Fragment(), View.OnClickListener {
             id = it.getInt(ARG_PARAM1)
             Log.d(TAG, "onCreate: $id")
             viewModel.currentProducto.observe(this,{
-                FillFields(it)
+                SetUpdateUi(it)
             })
             viewModel.GetCurrentProductoInfo(id!!)
         }
@@ -65,6 +65,7 @@ class CreateUpdateFragment : Fragment(), View.OnClickListener {
     private fun initViews(){
         binding.savebtn.setOnClickListener(this)
         binding.cancelbtn.setOnClickListener(this)
+        binding.deletebtn.setOnClickListener(this)
         binding.NombreTIL.editText!!.doOnTextChanged { text, start, before, count ->
         binding.savebtn.isEnabled = !text.isNullOrBlank() && !binding.DescripccionTIL.editText!!.text.isNullOrBlank()
         }
@@ -74,8 +75,9 @@ class CreateUpdateFragment : Fragment(), View.OnClickListener {
     }
 
     //Funcion para mostrar info de un registro existente
-    private fun FillFields(producto: Producto){
+    private fun SetUpdateUi(producto: Producto){
         binding.title.setText("Actualizar Registro")
+        binding.deletebtn.visibility = View.VISIBLE
         binding.NombreTIL.editText?.setText(producto.nombre)
         binding.DescripccionTIL.editText?.setText(producto.descripcion)
     }
@@ -95,6 +97,11 @@ class CreateUpdateFragment : Fragment(), View.OnClickListener {
         goToMain()
     }
 
+    private fun onDeleteClicked(){
+        viewModel.DeleteData()
+        goToMain()
+    }
+
     private fun goToMain(){
         parentFragmentManager
             .beginTransaction()
@@ -102,12 +109,12 @@ class CreateUpdateFragment : Fragment(), View.OnClickListener {
             .commit()
     }
 
-
     // Un solo listener para todas las views y discriminamos su comportamiento
     override fun onClick(p0: View?) {
         when(p0!!.id){
             R.id.savebtn -> onSaveClicked()
             R.id.cancelbtn -> onCancelClicked()
+            R.id.deletebtn -> onDeleteClicked()
         }
     }
 
